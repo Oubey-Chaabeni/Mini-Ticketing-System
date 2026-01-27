@@ -12,10 +12,10 @@ public class TicketingSystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TicketingSystemApplication.class, args);
 	}
-	@GetMapping("/hello")
-	public String hello()
+	@GetMapping("/ticket")
+	public Ticket ticket()
 	{
-		return("Hello i am oubey doing sending my first ever api");
+		return(new Ticket(01,"Freak Party , Epstin Island",20.6969));
 	}
 
 }
