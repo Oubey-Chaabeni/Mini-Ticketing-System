@@ -17,16 +17,35 @@ public class TicketingSystemApplication {
 		
 		SpringApplication.run(TicketingSystemApplication.class, args);
 	}
+
 	@GetMapping("/ticket")
 	public Ticket searchticket(@RequestParam int key)
 	{
-		return(ticketService.findTicket(key));
+		return(ticketService.findTicketById(key));
 	}
+
+
 	@GetMapping("/tickets")
 	public List<Ticket> tickets()
 	{
 		return(ticketService.getTicketList());
 	}
+
+
+	@GetMapping("/filetByEvent")
+	public List<Ticket> filterticketbyevent(@RequestParam String event)
+	{
+		return(ticketService.filterTicketByevent(event));
+	}
+
+
+	@GetMapping("/FilterByPrice")
+	public List<Ticket> filterticketbyevent(@RequestParam double price)
+	{
+		return(ticketService.filterTicketByprice(price));
+	}
+
+
 	@GetMapping("/Submiticket")
 	public void st(@RequestParam int key,@RequestParam String name,@RequestParam double price)
 	{
