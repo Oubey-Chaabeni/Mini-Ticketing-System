@@ -1,6 +1,5 @@
 package com.example.ticketing;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
@@ -13,31 +12,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TicketingSystemApplication {
 
-	List<Ticket> ticketList = new ArrayList<>();
+	TicketService ticketService = new TicketService();
 	public static void main(String[] args) {
 		
 		SpringApplication.run(TicketingSystemApplication.class, args);
 	}
 	@GetMapping("/ticket")
-	public Ticket ticket(@RequestParam int key)
+	public Ticket searchticket(@RequestParam int key)
 	{
-		ticketList.add(new Ticket(01,"Freak Party , Epstin Island",20.6969));
-		ticketList.add(new Ticket(02,"Diddy s white party , Diddy s mansion",45.34));
-		ticketList.add(new Ticket(03,"Lana Del Rey Concert , Feriena",3.00));
-		ticketList.add(new Ticket(04,"The Game Awards , Los Kasserine",25.33));
-
-		for(Ticket t : ticketList)
-		{
-			if(t.getId()==key)
-			{
-				return(t);
-			}
-		}
-		return(null);
+		return(ticketService.findTicket(key));
+	}
+	@GetMapping("/tickets")
+	public List<Ticket> tickets()
+	{
+		return(ticketService.getTicketList());
 	}
 	@GetMapping("/Submiticket")
 	public void st(@RequestParam int key,@RequestParam String name,@RequestParam double price)
 	{
-		ticketList.add(new Ticket(key, name, price));
+		ticketService.st(key, name, price);
 	}
 }
