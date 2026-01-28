@@ -3,6 +3,8 @@ package com.example.ticketing;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+@Service
 public class TicketService {
 
     private List<Ticket> ticketList = new ArrayList<>(
@@ -44,14 +46,14 @@ public class TicketService {
                 return (t);
             }
         }
-        return (null);
+        throw new TicketNotFoundException("Ticket with the ID "+id+" wasn t found anywhere");
     }
     public List<Ticket> filterTicketByevent(String event)
     {
         List<Ticket> s = new ArrayList<>();
         for(Ticket t : ticketList)
         {
-            if(t.getEvent().equals(event))
+            if(t.getEvent().equalsIgnoreCase(event))
             {
                 s.add(t);
             }
